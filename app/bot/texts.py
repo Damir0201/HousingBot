@@ -24,6 +24,7 @@ def property_card(prop: Property, t: Translator) -> str:
         flags.append(t("property.flag.pets"))
     if prop.utilities_included:
         flags.append(t("property.flag.utilities"))
+    term_label = t("search.term_short") if prop.min_term_months <= 3 else t("search.term_long")
     return t(
         "property.card",
         title=escape(prop.title),
@@ -34,7 +35,7 @@ def property_card(prop: Property, t: Translator) -> str:
         area=f"{prop.area_m2:g} m²" if prop.area_m2 else "—",
         price=money(prop.price_month),
         deposit=money(prop.deposit) if prop.deposit else "—",
-        min_term=prop.min_term_months,
+        min_term=term_label,
         available=prop.available_from.strftime("%d.%m.%Y") if prop.available_from else t("property.now"),
         flags=" · ".join(flags),
     ).strip()

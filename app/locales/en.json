@@ -38,7 +38,7 @@
   "start": {
     "choose_language": "🌐 Выберите язык / Choose your language / Scegli la lingua:",
     "language_set": "✅ Language set: English",
-    "welcome": "👋 Welcome to <b>DOMIK</b>{name}!\n\nTell me in your own words what kind of home you are looking for (district, budget, rooms, rental term), or use the menu buttons below.",
+    "welcome": "👋 Welcome to <b>DOMIK</b>{name}!\n\nTell me in your own words what kind of home you are looking for (district, budget, rooms, stay period), or use the menu buttons below.",
     "help": "ℹ️ <b>How to use DOMIK bot:</b>\n\n• Describe your requirements in chat — our AI assistant will find matching properties and answer rental questions.\n• Tap <b>🔍 Find property</b> for a step-by-step filter wizard.\n• On any property card tap <b>📅 Book a viewing</b> to pick a date and time.\n• In <b>📅 My viewings</b> you can reschedule, notify that you are running late, or cancel.\n• Send /reset to clear the AI conversation history."
   },
   "ai": {
@@ -51,13 +51,14 @@
     "ask_district": "📍 Enter your preferred district or tap «Any»:",
     "ask_budget": "💶 Select your monthly budget (€):",
     "ask_rooms": "🚪 Number of rooms:",
-    "ask_term": "📆 Minimum rental term:",
-    "term_months": "{n}+ mo.",
+    "ask_term": "📆 What rental period are you looking for?",
+    "term_short": "Short-term",
+    "term_long": "Long-term",
     "found": "🏠 Matching properties found: <b>{count}</b>",
     "nothing_found": "😔 No available properties match these filters right now. Try broadening your criteria or describe what you need in chat."
   },
   "property": {
-    "card": "🏠 <b>{title}</b>\n📍 {city} {district} · {type}, {rooms} rm, {area}\n💶 <b>{price} € / mo.</b> (deposit: {deposit} €)\n📆 Min. term: {min_term} mo. · Available: {available}\n{flags}",
+    "card": "🏠 <b>{title}</b>\n📍 {city} {district} · {type}, {rooms} rm, {area}\n💶 <b>{price} € / mo.</b> (deposit: {deposit} €)\n📆 Period: {min_term} · Available: {available}\n{flags}",
     "now": "now",
     "type": {
       "apartment": "Apartment",

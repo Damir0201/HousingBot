@@ -63,6 +63,10 @@ class PropertyRepository:
             stmt = stmt.where(Property.rooms >= c.rooms_min)
         if c.rooms_max is not None:
             stmt = stmt.where(Property.rooms <= c.rooms_max)
+        if c.rental_period == "short":
+            stmt = stmt.where(Property.min_term_months <= 3)
+        elif c.rental_period == "long":
+            stmt = stmt.where(or_(Property.max_term_months.is_(None), Property.max_term_months >= 6))
         if c.term_months is not None:
             stmt = stmt.where(Property.min_term_months <= c.term_months).where(
                 or_(Property.max_term_months.is_(None), Property.max_term_months >= c.term_months)

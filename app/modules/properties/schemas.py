@@ -1,6 +1,6 @@
 from datetime import date, datetime
 from decimal import Decimal
-from typing import Any
+from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
@@ -20,6 +20,9 @@ class PropertySearchCriteria(BaseModel):
     property_types: list[PropertyType] = Field(default_factory=list)
     rooms_min: int | None = Field(None, ge=0, le=20)
     rooms_max: int | None = Field(None, ge=0, le=20)
+    rental_period: Literal["short", "long"] | None = Field(
+        None, description="Desired stay period: 'short' (short-term) or 'long' (long-term)"
+    )
     term_months: int | None = Field(None, ge=1, le=120, description="Desired rental term in months")
     move_in_date: date | None = None
     furnished: bool | None = None

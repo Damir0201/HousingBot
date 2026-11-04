@@ -38,7 +38,7 @@
   "start": {
     "choose_language": "🌐 Выберите язык / Choose your language / Scegli la lingua:",
     "language_set": "✅ Lingua impostata: Italiano",
-    "welcome": "👋 Benvenuto in <b>DOMIK</b>{name}!\n\nScrivimi liberamente che tipo di alloggio stai cercando (zona, budget, locali, durata dell'affitto) oppure usa i pulsanti del menu qui sotto.",
+    "welcome": "👋 Benvenuto in <b>DOMIK</b>{name}!\n\nScrivimi liberamente che tipo di alloggio stai cercando (zona, budget, locali, periodo di soggiorno) oppure usa i pulsanti del menu qui sotto.",
     "help": "ℹ️ <b>Come usare il bot DOMIK:</b>\n\n• Scrivi la tua richiesta in chat — l'assistente IA selezionerà gli immobili adatti e risponderà alle domande sull'affitto.\n• Tocca <b>🔍 Cerca casa</b> per la ricerca guidata passo dopo passo.\n• Sulla scheda dell'immobile tocca <b>📅 Prenota visita</b> per scegliere data e ora.\n• Nella sezione <b>📅 Le mie visite</b> puoi spostare l'appuntamento, avvisare di un ritardo o annullare.\n• Il comando /reset cancella la cronologia con l'IA."
   },
   "ai": {
@@ -51,13 +51,14 @@
     "ask_district": "📍 Indica la zona desiderata oppure tocca «Qualsiasi»:",
     "ask_budget": "💶 Seleziona il budget mensile (€):",
     "ask_rooms": "🚪 Numero di locali:",
-    "ask_term": "📆 Durata minima dell'affitto:",
-    "term_months": "{n}+ mesi",
+    "ask_term": "📆 Per quale periodo cerchi l'alloggio?",
+    "term_short": "Breve periodo",
+    "term_long": "Lungo periodo",
     "found": "🏠 Immobili trovati: <b>{count}</b>",
     "nothing_found": "😔 Nessun immobile disponibile con questi filtri al momento. Prova ad ampliare i criteri o scrivi le tue preferenze in chat."
   },
   "property": {
-    "card": "🏠 <b>{title}</b>\n📍 {city} {district} · {type}, {rooms} loc., {area}\n💶 <b>{price} € / mese</b> (cauzione: {deposit} €)\n📆 Durata min.: {min_term} mesi · Disponibile: {available}\n{flags}",
+    "card": "🏠 <b>{title}</b>\n📍 {city} {district} · {type}, {rooms} loc., {area}\n💶 <b>{price} € / mese</b> (cauzione: {deposit} €)\n📆 Periodo: {min_term} · Disponibile: {available}\n{flags}",
     "now": "subito",
     "type": {
       "apartment": "Appartamento",

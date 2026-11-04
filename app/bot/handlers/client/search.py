@@ -79,7 +79,9 @@ async def term(
     user: User,
     t: Translator,
 ) -> None:
-    if callback_data.value != "any":
+    if callback_data.value in ("short", "long"):
+        await state.update_data(rental_period=callback_data.value)
+    elif callback_data.value.isdigit():
         await state.update_data(term_months=int(callback_data.value))
     data = await state.get_data()
     await state.clear()

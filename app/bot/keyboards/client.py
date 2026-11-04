@@ -12,7 +12,7 @@ from app.shared.timeutils import fmt_time
 
 BUDGET_OPTIONS = ["0-500", "500-800", "800-1200", "1200-2000", "2000-"]
 ROOMS_OPTIONS = ["1", "2", "3", "4"]
-TERM_OPTIONS = ["1", "3", "6", "12"]
+TERM_OPTIONS = ["short", "long"]
 
 
 def language() -> InlineKeyboardMarkup:
@@ -138,7 +138,7 @@ def search_rooms(t: Translator) -> InlineKeyboardMarkup:
 def search_term(t: Translator) -> InlineKeyboardMarkup:
     b = InlineKeyboardBuilder()
     for value in TERM_OPTIONS:
-        b.button(text=t("search.term_months", n=value), callback_data=SearchCb(field="term", value=value))
+        b.button(text=t(f"search.term_{value}"), callback_data=SearchCb(field="term", value=value))
     b.button(text=t("search.any"), callback_data=SearchCb(field="term", value="any"))
-    b.adjust(4, 1)
+    b.adjust(2, 1)
     return b.as_markup()
