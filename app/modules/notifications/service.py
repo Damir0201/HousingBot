@@ -1,3 +1,5 @@
+from html import escape
+
 from aiogram import Bot
 from aiogram.exceptions import TelegramAPIError, TelegramForbiddenError, TelegramRetryAfter
 from aiogram.types import InlineKeyboardMarkup
@@ -88,7 +90,7 @@ class Notifier:
         t = self.t(entry.client)
         await self.send(
             entry.client,
-            t("booking.waitlist_offer", title=entry.property.title),
+            t("booking.waitlist_offer", title=escape(entry.property.title)),
             client_kb.days(entry.property_id, days, t),
         )
 
@@ -101,17 +103,17 @@ class Notifier:
                 t(
                     "staff.ticket_new",
                     id=ticket.id,
-                    category=ticket.category,
-                    priority=ticket.priority,
-                    client=ticket.client.mention,
-                    summary=ticket.summary,
+                    category=escape(str(ticket.category)),
+                    priority=escape(str(ticket.priority)),
+                    client=escape(ticket.client.mention),
+                    summary=escape(ticket.summary),
                 ),
                 staff_kb.ticket_actions(ticket.id, t, taken=False),
             )
 
     async def operator_reply(self, ticket: Ticket, text: str) -> bool:
         t = self.t(ticket.client)
-        return await self.send(ticket.client, t("support.operator_reply", id=ticket.id, text=text))
+        return await self.send(ticket.client, t("support.operator_reply", id=ticket.id, text=escape(text)))
 
     async def ticket_resolved(self, ticket: Ticket) -> None:
         t = self.t(ticket.client)

@@ -140,6 +140,8 @@ class BookingService:
         booking = await self.get(booking_id)
         await self._ensure_can_manage(booking, actor)
         self._ensure_active(booking)
+        if booking.extended_minutes > 0:
+            raise BookingStateError("Booking has already been extended")
         try:
             async with self.session.begin_nested():
                 booking.ends_at = booking.ends_at + timedelta(minutes=minutes)

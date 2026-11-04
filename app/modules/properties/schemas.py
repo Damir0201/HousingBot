@@ -115,10 +115,12 @@ class PropertyBrief(BaseModel):
     code: str
     title: str
     property_type: PropertyType
+    city: str
     district: str
     rooms: int
     price_month: Decimal
     min_term_months: int
+    max_term_months: int | None
     furnished: bool
     pets_allowed: bool
     available_from: date | None

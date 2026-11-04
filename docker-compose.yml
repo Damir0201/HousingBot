@@ -16,6 +16,16 @@ x-app: &app
       condition: service_healthy
   restart: unless-stopped
 
+x-runtime: &runtime
+  <<: *app
+  depends_on:
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+    migrate:
+      condition: service_completed_successfully
+
 services:
   postgres:
     image: postgres:16-alpine
@@ -54,36 +64,24 @@ services:
     restart: "no"
 
   api:
-    <<: *app
+    <<: *runtime
     command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
     ports:
       - "8000:8000"
-    depends_on:
-      migrate:
-        condition: service_completed_successfully
 
   # Long polling for local development. In production set BOT_MODE=webhook
   # and remove this service: updates will arrive at api:/webhook/telegram.
   bot:
-    <<: *app
+    <<: *runtime
     command: ["python", "-m", "app.bot.main"]
-    depends_on:
-      migrate:
-        condition: service_completed_successfully
 
   worker:
-    <<: *app
+    <<: *runtime
     command: ["celery", "-A", "app.worker", "worker", "--loglevel=INFO", "--concurrency=4"]
-    depends_on:
-      migrate:
-        condition: service_completed_successfully
 
   beat:
-    <<: *app
+    <<: *runtime
     command: ["celery", "-A", "app.worker", "beat", "--loglevel=INFO", "--schedule=/tmp/celerybeat-schedule"]
-    depends_on:
-      migrate:
-        condition: service_completed_successfully
 
 volumes:
   postgres_data:
