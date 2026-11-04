@@ -1,0 +1,223 @@
+{
+  "commands": {
+    "start": "Avvia il bot e apri il menu principale",
+    "search": "Cerca immobile",
+    "bookings": "Le mie visite",
+    "support": "Contatta un operatore",
+    "language": "Cambia lingua",
+    "reset": "Azzera la chat con l'IA",
+    "help": "Guida"
+  },
+  "days": {
+    "0": "Lun",
+    "1": "Mar",
+    "2": "Mer",
+    "3": "Gio",
+    "4": "Ven",
+    "5": "Sab",
+    "6": "Dom"
+  },
+  "menu": {
+    "search": "🔍 Cerca casa",
+    "bookings": "📅 Le mie visite",
+    "support": "💬 Operatore",
+    "language": "🌐 Lingua",
+    "admin": "🛠 CRM",
+    "placeholder": "Scrivi cosa cerchi o scegli dal menu…"
+  },
+  "btn": {
+    "back": "⬅️ Indietro",
+    "book": "📅 Prenota visita",
+    "details": "ℹ️ Dettagli",
+    "waitlist": "🔔 Lista d'attesa",
+    "late": "⏰ Sono in ritardo (+15 min)",
+    "reschedule": "🔄 Sposta",
+    "cancel_booking": "❌ Annulla",
+    "share_contact": "📱 Condividi numero di telefono"
+  },
+  "start": {
+    "choose_language": "🌐 Выберите язык / Choose your language / Scegli la lingua:",
+    "language_set": "✅ Lingua impostata: Italiano",
+    "welcome": "👋 Benvenuto in <b>DOMIK</b>{name}!\n\nScrivimi liberamente che tipo di alloggio stai cercando (zona, budget, locali, durata dell'affitto) oppure usa i pulsanti del menu qui sotto.",
+    "help": "ℹ️ <b>Come usare il bot DOMIK:</b>\n\n• Scrivi la tua richiesta in chat — l'assistente IA selezionerà gli immobili adatti e risponderà alle domande sull'affitto.\n• Tocca <b>🔍 Cerca casa</b> per la ricerca guidata passo dopo passo.\n• Sulla scheda dell'immobile tocca <b>📅 Prenota visita</b> per scegliere data e ora.\n• Nella sezione <b>📅 Le mie visite</b> puoi spostare l'appuntamento, avvisare di un ritardo o annullare.\n• Il comando /reset cancella la cronologia con l'IA."
+  },
+  "ai": {
+    "fallback": "🤖 L'assistente IA è temporaneamente non disponibile. Usa il pulsante <b>🔍 Cerca casa</b> o contatta un operatore.",
+    "reset": "🧹 Cronologia della conversazione cancellata. Dimmi che tipo di casa stai cercando!",
+    "text_only": "Per favore invia un messaggio di testo o scegli un'opzione dal menu."
+  },
+  "search": {
+    "any": "Qualsiasi",
+    "ask_district": "📍 Indica la zona desiderata oppure tocca «Qualsiasi»:",
+    "ask_budget": "💶 Seleziona il budget mensile (€):",
+    "ask_rooms": "🚪 Numero di locali:",
+    "ask_term": "📆 Durata minima dell'affitto:",
+    "term_months": "{n}+ mesi",
+    "found": "🏠 Immobili trovati: <b>{count}</b>",
+    "nothing_found": "😔 Nessun immobile disponibile con questi filtri al momento. Prova ad ampliare i criteri o scrivi le tue preferenze in chat."
+  },
+  "property": {
+    "card": "🏠 <b>{title}</b>\n📍 {city} {district} · {type}, {rooms} loc., {area}\n💶 <b>{price} € / mese</b> (cauzione: {deposit} €)\n📆 Durata min.: {min_term} mesi · Disponibile: {available}\n{flags}",
+    "now": "subito",
+    "type": {
+      "apartment": "Appartamento",
+      "studio": "Monolocale",
+      "room": "Stanza",
+      "house": "Casa"
+    },
+    "status": {
+      "available": "Disponibile",
+      "reserved": "Riservato",
+      "rented": "Affittato",
+      "archived": "Archiviato"
+    },
+    "flag": {
+      "furnished": "🛋 Arredato",
+      "pets": "🐾 Animali ammessi",
+      "utilities": "💡 Spese incluse"
+    }
+  },
+  "booking": {
+    "choose_day": "📅 Scegli il giorno della visita per <b>{title}</b>:",
+    "choose_new_day": "🔄 Scegli la nuova data della visita per <b>{title}</b>:",
+    "choose_time": "🕒 Orari disponibili per <b>{day}</b>:",
+    "no_slots": "😔 Tutti gli orari per <b>{day}</b> sono occupati. Scegli un altro giorno o iscriviti alla lista d'attesa.",
+    "ask_contact": "📱 Per confermare la prenotazione, condividi il tuo numero di telefono con il pulsante qui sotto:",
+    "own_contact_only": "Per favore condividi il tuo contatto personale usando il pulsante qui sotto.",
+    "contact_saved": "✅ Numero di telefono salvato.",
+    "pick_another": "Per favore scegli un'altra data o orario:",
+    "confirmed": "✅ <b>Visita prenotata!</b>\n\n🏠 {title}\n📍 {address}\n🕒 {time} (fino alle {end})\n🧑‍💼 Agente: {agent}\n\nTi invieremo un promemoria 15 minuti prima dell'incontro.",
+    "rescheduled": "🔄 <b>Visita spostata!</b>\n\n🏠 {title}\n📍 {address}\n🕒 {time} (fino alle {end})\n🧑‍💼 Agente: {agent}",
+    "extended": "⏰ Visita prolungata fino alle {end}. L'agente è stato avvisato!",
+    "cancelled": "❌ La visita per <b>{title}</b> è stata annullata.",
+    "cancelled_by_staff": "⚠️ La tua visita per <b>{title}</b> ({time}) è stata annullata dall'agenzia. Contattaci per scegliere un nuovo orario.",
+    "item": "📅 <b>{time}</b> — {title}\n🧑‍💼 Agente: {agent}",
+    "none": "Non hai visite in programma.",
+    "reminder": "🔔 <b>Promemoria: visita tra {minutes} min.!</b>\n\n🏠 {title}\n📍 {address}\n🕒 {time}\n🧑‍💼 Agente: {agent}\n\nSe sei in ritardo, usa i pulsanti qui sotto:",
+    "property_unavailable": "⚠️ L'immobile <b>{title}</b> è stato appena affittato, quindi la tua visita ({time}) è stata annullata automaticamente.",
+    "alternatives": "👇 Ecco alcune alternative simili disponibili:",
+    "waitlist_joined": "🔔 Sei stato aggiunto alla lista d'attesa per <b>{title}</b>. Ti scriveremo appena si libera un posto.",
+    "waitlist_offer": "🎉 Si è liberato un posto per visitare <b>{title}</b>! Scegli una data:",
+    "status": {
+      "scheduled": "In programma",
+      "completed": "Completata",
+      "cancelled": "Annullata",
+      "no_show": "Non presentato"
+    }
+  },
+  "support": {
+    "ask": "💬 Descrivi la tua richiesta in un unico messaggio — la inoltreremo a un operatore:",
+    "ticket_created": "✅ Richiesta <b>#{id}</b> inviata a un operatore. Riceverai la risposta in questa chat.",
+    "operator_reply": "👨‍💼 <b>Risposta dell'operatore alla richiesta #{id}:</b>\n\n{text}",
+    "resolved": "✅ La tua richiesta <b>#{id}</b> è stata contrassegnata come risolta. Scrivici pure se hai altre domande!"
+  },
+  "ticket": {
+    "status": {
+      "open": "Aperto",
+      "in_progress": "In lavorazione",
+      "resolved": "Risolto"
+    },
+    "category": {
+      "general": "Generale",
+      "booking": "Visite",
+      "property": "Immobile",
+      "contract": "Contratto",
+      "payment": "Pagamenti",
+      "complaint": "Reclamo",
+      "other": "Altro"
+    },
+    "priority": {
+      "low": "Bassa",
+      "normal": "Normale",
+      "high": "Alta"
+    }
+  },
+  "lead": {
+    "status": {
+      "new": "Nuovo",
+      "qualified": "Qualificato",
+      "viewing": "Visita",
+      "negotiation": "Trattativa",
+      "won": "Chiuso",
+      "lost": "Perso"
+    }
+  },
+  "staff": {
+    "booking_new": "🆕 <b>Nuova visita</b>\n🏠 {title}\n📍 {address}\n🕒 {time}–{end}\n👤 Cliente: {client} ({phone})",
+    "booking_cancelled": "❌ <b>Visita annullata</b>\n🏠 {title}\n🕒 {time}\n👤 Cliente: {client}",
+    "booking_rescheduled": "🔄 <b>Visita spostata</b>\n🏠 {title}\n🕒 Nuovo orario: {time}–{end}\n👤 Cliente: {client}",
+    "booking_extended": "⏰ <b>Cliente in ritardo</b>\n🏠 {title}\n🕒 Prolungata fino alle {end}\n👤 Cliente: {client} ({phone})",
+    "reminder": "🔔 <b>Visita tra {minutes} min</b>\n🏠 {title} ({address})\n🕒 {time}\n👤 Cliente: {client} ({phone})",
+    "ticket_new": "🆘 <b>Nuova richiesta #{id}</b> [{priority} / {category}]\n👤 {client}\n\n{summary}",
+    "ticket_card": "🎫 <b>Richiesta #{id}</b>\n📂 {category} · ⚡ {priority} · 📌 {status}\n👤 {client} ({phone})\n\n{summary}"
+  },
+  "admin": {
+    "title": "🛠 <b>Pannello di controllo DOMIK CRM</b>",
+    "btn": {
+      "stats": "📊 Statistiche",
+      "schedule": "📅 Agenda",
+      "props": "🏠 Immobili",
+      "tickets": "🎫 Richieste",
+      "agents": "🧑‍💼 Agenti",
+      "excel_export": "📥 Esporta Excel",
+      "excel_import": "📤 Importa Excel",
+      "take": "🙋 Prendi in carico",
+      "reply": "✉️ Rispondi",
+      "resolve": "✅ Chiudi",
+      "deactivate": "Disattiva: {name}",
+      "add_photo": "📷 Aggiungi foto ({count}/10)",
+      "clear_photos": "🗑 Cancella foto"
+    },
+    "stats_title": "📊 <b>Statistiche agenzia ({days} giorni)</b>",
+    "stats_properties": "🏠 Immobili",
+    "stats_bookings": "📅 Visite",
+    "stats_agents": "🧑‍💼 Agenti",
+    "stats_tickets": "🎫 Richieste",
+    "stats_leads": "🧲 Funnel clienti",
+    "stats_footer": "👥 Nuovi clienti: <b>{clients}</b> · 🔔 In lista d'attesa: <b>{waitlist}</b>",
+    "props_title": "🏠 <b>Immobili</b> (seleziona per cambiare stato):",
+    "props_empty": "Nessun immobile presente. Carica un file Excel o creane uno via API.",
+    "prop_status": "Stato attuale: <b>{status}</b>",
+    "prop_photos": "📷 Foto: <b>{count}</b> / 10",
+    "photo_send_prompt": "📷 Invia una foto (o un album) per l'immobile <b>{code}</b> (attuali: {count}/10):",
+    "photo_added": "✅ Foto salvata per <b>{code}</b> (totale: <b>{count}/10</b>). Invia altre foto o torna alla scheda:",
+    "photos_cleared": "Foto cancellate",
+    "status_changed": "Stato aggiornato. Visite annullate: {cancelled}",
+    "schedule_title": "📅 <b>Agenda per {day}</b>",
+    "schedule_empty": "Nessuna visita in programma per questo giorno.",
+    "not_agent": "Il tuo profilo non è registrato come agente.",
+    "saved": "Salvato",
+    "booking_cancelled": "Visita annullata, cliente avvisato",
+    "tickets_title": "🎫 <b>Richieste aperte ({count})</b>:",
+    "tickets_empty": "🎉 Nessuna richiesta aperta!",
+    "ticket_taken": "Richiesta assegnata a te",
+    "transcript": "Cronologia conversazione cliente:",
+    "ticket_reply_prompt": "✉️ Scrivi la risposta al cliente per la richiesta #{id}:",
+    "reply_sent": "✅ Risposta inviata al cliente.",
+    "reply_failed": "⚠️ Impossibile consegnare il messaggio (bot bloccato dall'utente).",
+    "ticket_resolved": "Richiesta chiusa",
+    "excel_exported": "📥 Database immobili DOMIK aggiornato",
+    "excel_send_file": "📤 Invia un file <code>.xlsx</code> per sincronizzare gli immobili:",
+    "excel_bad_file": "⚠️ File non valido. Invia un foglio .xlsx valido.",
+    "excel_too_big": "⚠️ File troppo grande (max 10 MB).",
+    "excel_report": "✅ <b>Sincronizzazione completata</b>\n• Creati: <b>{created}</b>\n• Aggiornati: <b>{updated}</b>\n• Invariati: <b>{unchanged}</b>\n• Conflitti (priorità CRM): <b>{conflicts}</b>\n• Errori nelle righe: <b>{errors}</b>",
+    "excel_conflicts": "⚠️ Ignorati perché modificati più di recente nel CRM:",
+    "agents_title": "🧑‍💼 <b>Agenti</b>",
+    "agents_hint": "Aggiungi agente: <code>/add_agent &lt;telegram_id&gt; [Nome]</code>",
+    "add_agent_usage": "Uso: <code>/add_agent &lt;telegram_id&gt; [Nome]</code>",
+    "user_not_found": "Utente non trovato. Deve prima premere /start nel bot.",
+    "agent_added": "✅ Agente <b>{name}</b> attivato."
+  },
+  "errors": {
+    "generic": "⚠️ Si è verificato un errore. Riprova.",
+    "not_found": "Elemento non trovato.",
+    "permission_denied": "Permessi insufficienti per eseguire l'operazione.",
+    "validation": "Controlla i dati inseriti.",
+    "property_unavailable": "Purtroppo questo immobile non è più disponibile per le visite.",
+    "slot_unavailable": "Questo orario non è più disponibile. Scegli un altro slot.",
+    "booking_state": "Questa prenotazione non può più essere modificata.",
+    "extension_conflict": "Impossibile prolungare la visita: l'agente ha un altro appuntamento subito dopo.",
+    "external_service": "Servizio esterno temporaneamente non disponibile. Riprova tra poco.",
+    "throttled": "⏳ Troppi messaggi. Attendi qualche secondo."
+  }
+}

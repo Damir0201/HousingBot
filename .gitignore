@@ -1,0 +1,47 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+.eggs/
+
+# --- Virtual environments ---
+.venv/
+venv/
+ENV/
+env/
+
+# --- Secrets & local configuration ---
+.env
+.env.*
+!.env.example
+
+# --- Test / linter caches ---
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# --- Runtime data & Celery ---
+data/
+*.xlsx
+celerybeat-schedule*
+
+# --- Logs ---
+*.log
+logs/
+
+# --- IDEs & OS ---
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# --- Local AI agent skills ---
+skills/

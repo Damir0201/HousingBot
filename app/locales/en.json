@@ -1,0 +1,223 @@
+{
+  "commands": {
+    "start": "Start the bot and open main menu",
+    "search": "Find a property",
+    "bookings": "My viewings",
+    "support": "Contact an operator",
+    "language": "Change language",
+    "reset": "Reset AI conversation",
+    "help": "Help"
+  },
+  "days": {
+    "0": "Mon",
+    "1": "Tue",
+    "2": "Wed",
+    "3": "Thu",
+    "4": "Fri",
+    "5": "Sat",
+    "6": "Sun"
+  },
+  "menu": {
+    "search": "🔍 Find property",
+    "bookings": "📅 My viewings",
+    "support": "💬 Operator",
+    "language": "🌐 Language",
+    "admin": "🛠 CRM",
+    "placeholder": "Describe what you are looking for or use the menu…"
+  },
+  "btn": {
+    "back": "⬅️ Back",
+    "book": "📅 Book a viewing",
+    "details": "ℹ️ Details",
+    "waitlist": "🔔 Join waitlist",
+    "late": "⏰ Running late (+15 min)",
+    "reschedule": "🔄 Reschedule",
+    "cancel_booking": "❌ Cancel",
+    "share_contact": "📱 Share phone number"
+  },
+  "start": {
+    "choose_language": "🌐 Выберите язык / Choose your language / Scegli la lingua:",
+    "language_set": "✅ Language set: English",
+    "welcome": "👋 Welcome to <b>DOMIK</b>{name}!\n\nTell me in your own words what kind of home you are looking for (district, budget, rooms, rental term), or use the menu buttons below.",
+    "help": "ℹ️ <b>How to use DOMIK bot:</b>\n\n• Describe your requirements in chat — our AI assistant will find matching properties and answer rental questions.\n• Tap <b>🔍 Find property</b> for a step-by-step filter wizard.\n• On any property card tap <b>📅 Book a viewing</b> to pick a date and time.\n• In <b>📅 My viewings</b> you can reschedule, notify that you are running late, or cancel.\n• Send /reset to clear the AI conversation history."
+  },
+  "ai": {
+    "fallback": "🤖 The AI assistant is temporarily unavailable. Please use <b>🔍 Find property</b> or contact an operator.",
+    "reset": "🧹 Conversation history cleared. Tell me what kind of home you are looking for!",
+    "text_only": "Please send a text message or choose an option from the menu."
+  },
+  "search": {
+    "any": "Any",
+    "ask_district": "📍 Enter your preferred district or tap «Any»:",
+    "ask_budget": "💶 Select your monthly budget (€):",
+    "ask_rooms": "🚪 Number of rooms:",
+    "ask_term": "📆 Minimum rental term:",
+    "term_months": "{n}+ mo.",
+    "found": "🏠 Matching properties found: <b>{count}</b>",
+    "nothing_found": "😔 No available properties match these filters right now. Try broadening your criteria or describe what you need in chat."
+  },
+  "property": {
+    "card": "🏠 <b>{title}</b>\n📍 {city} {district} · {type}, {rooms} rm, {area}\n💶 <b>{price} € / mo.</b> (deposit: {deposit} €)\n📆 Min. term: {min_term} mo. · Available: {available}\n{flags}",
+    "now": "now",
+    "type": {
+      "apartment": "Apartment",
+      "studio": "Studio",
+      "room": "Room",
+      "house": "House"
+    },
+    "status": {
+      "available": "Available",
+      "reserved": "Reserved",
+      "rented": "Rented",
+      "archived": "Archived"
+    },
+    "flag": {
+      "furnished": "🛋 Furnished",
+      "pets": "🐾 Pets allowed",
+      "utilities": "💡 Utilities included"
+    }
+  },
+  "booking": {
+    "choose_day": "📅 Choose a viewing day for <b>{title}</b>:",
+    "choose_new_day": "🔄 Choose a new viewing date for <b>{title}</b>:",
+    "choose_time": "🕒 Available slots on <b>{day}</b>:",
+    "no_slots": "😔 All slots on <b>{day}</b> are taken. Pick another day or join the waitlist and we will notify you as soon as a slot opens.",
+    "ask_contact": "📱 To confirm your booking, please share your phone number using the button below:",
+    "own_contact_only": "Please share your own phone number using the button below.",
+    "contact_saved": "✅ Phone number saved.",
+    "pick_another": "Please choose another date or time:",
+    "confirmed": "✅ <b>Viewing booked!</b>\n\n🏠 {title}\n📍 {address}\n🕒 {time} (until {end})\n🧑‍💼 Agent: {agent}\n\nWe will remind you 15 minutes before the meeting.",
+    "rescheduled": "🔄 <b>Viewing rescheduled!</b>\n\n🏠 {title}\n📍 {address}\n🕒 {time} (until {end})\n🧑‍💼 Agent: {agent}",
+    "extended": "⏰ Viewing extended until {end}. The agent has been notified!",
+    "cancelled": "❌ Viewing for <b>{title}</b> has been cancelled.",
+    "cancelled_by_staff": "⚠️ Your viewing for <b>{title}</b> ({time}) was cancelled by the agency. Please contact us to pick a new time.",
+    "item": "📅 <b>{time}</b> — {title}\n🧑‍💼 Agent: {agent}",
+    "none": "You have no upcoming viewings scheduled.",
+    "reminder": "🔔 <b>Viewing reminder: in {minutes} min!</b>\n\n🏠 {title}\n📍 {address}\n🕒 {time}\n🧑‍💼 Agent: {agent}\n\nRunning late? Use the buttons below:",
+    "property_unavailable": "⚠️ <b>{title}</b> has just been rented, so your upcoming viewing ({time}) was automatically cancelled.",
+    "alternatives": "👇 Here are similar available properties you might like:",
+    "waitlist_joined": "🔔 You have been added to the waitlist for <b>{title}</b>. We will message you as soon as a slot opens.",
+    "waitlist_offer": "🎉 A viewing slot opened up for <b>{title}</b>! Choose a convenient date:",
+    "status": {
+      "scheduled": "Scheduled",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "no_show": "No-show"
+    }
+  },
+  "support": {
+    "ask": "💬 Describe your question in a single message — we will forward it to an operator:",
+    "ticket_created": "✅ Request <b>#{id}</b> has been sent to an operator. You will receive the reply right in this chat.",
+    "operator_reply": "👨‍💼 <b>Operator reply for request #{id}:</b>\n\n{text}",
+    "resolved": "✅ Your request <b>#{id}</b> has been marked as resolved. Feel free to write again anytime!"
+  },
+  "ticket": {
+    "status": {
+      "open": "Open",
+      "in_progress": "In progress",
+      "resolved": "Resolved"
+    },
+    "category": {
+      "general": "General",
+      "booking": "Booking",
+      "property": "Property",
+      "contract": "Contract",
+      "payment": "Payment",
+      "complaint": "Complaint",
+      "other": "Other"
+    },
+    "priority": {
+      "low": "Low",
+      "normal": "Normal",
+      "high": "High"
+    }
+  },
+  "lead": {
+    "status": {
+      "new": "New",
+      "qualified": "Qualified",
+      "viewing": "Viewing",
+      "negotiation": "Negotiation",
+      "won": "Won",
+      "lost": "Lost"
+    }
+  },
+  "staff": {
+    "booking_new": "🆕 <b>New viewing</b>\n🏠 {title}\n📍 {address}\n🕒 {time}–{end}\n👤 Client: {client} ({phone})",
+    "booking_cancelled": "❌ <b>Viewing cancelled</b>\n🏠 {title}\n🕒 {time}\n👤 Client: {client}",
+    "booking_rescheduled": "🔄 <b>Viewing rescheduled</b>\n🏠 {title}\n🕒 New time: {time}–{end}\n👤 Client: {client}",
+    "booking_extended": "⏰ <b>Client is running late</b>\n🏠 {title}\n🕒 Extended until {end}\n👤 Client: {client} ({phone})",
+    "reminder": "🔔 <b>Viewing in {minutes} min</b>\n🏠 {title} ({address})\n🕒 {time}\n👤 Client: {client} ({phone})",
+    "ticket_new": "🆘 <b>New ticket #{id}</b> [{priority} / {category}]\n👤 {client}\n\n{summary}",
+    "ticket_card": "🎫 <b>Ticket #{id}</b>\n📂 {category} · ⚡ {priority} · 📌 {status}\n👤 {client} ({phone})\n\n{summary}"
+  },
+  "admin": {
+    "title": "🛠 <b>DOMIK CRM Control Panel</b>",
+    "btn": {
+      "stats": "📊 Statistics",
+      "schedule": "📅 Schedule",
+      "props": "🏠 Properties",
+      "tickets": "🎫 Tickets",
+      "agents": "🧑‍💼 Agents",
+      "excel_export": "📥 Export Excel",
+      "excel_import": "📤 Import Excel",
+      "take": "🙋 Take",
+      "reply": "✉️ Reply",
+      "resolve": "✅ Resolve",
+      "deactivate": "Deactivate: {name}",
+      "add_photo": "📷 Add photo ({count}/10)",
+      "clear_photos": "🗑 Clear photos"
+    },
+    "stats_title": "📊 <b>Agency statistics for {days} days</b>",
+    "stats_properties": "🏠 Properties",
+    "stats_bookings": "📅 Viewings",
+    "stats_agents": "🧑‍💼 Agents",
+    "stats_tickets": "🎫 Tickets",
+    "stats_leads": "🧲 Sales funnel",
+    "stats_footer": "👥 New clients: <b>{clients}</b> · 🔔 On waitlist: <b>{waitlist}</b>",
+    "props_title": "🏠 <b>Properties</b> (select to change status):",
+    "props_empty": "No properties yet. Upload an Excel sheet or create one via API.",
+    "prop_status": "Current status: <b>{status}</b>",
+    "prop_photos": "📷 Photos: <b>{count}</b> / 10",
+    "photo_send_prompt": "📷 Send a photo (or an album of photos) for property <b>{code}</b> (current: {count}/10):",
+    "photo_added": "✅ Photo saved for <b>{code}</b> (total: <b>{count}/10</b>). Send more or return to the card:",
+    "photos_cleared": "Photos cleared",
+    "status_changed": "Status updated. Cancelled viewings: {cancelled}",
+    "schedule_title": "📅 <b>Schedule for {day}</b>",
+    "schedule_empty": "No viewings scheduled for this day.",
+    "not_agent": "Your profile is not registered as an agent.",
+    "saved": "Saved",
+    "booking_cancelled": "Viewing cancelled, client notified",
+    "tickets_title": "🎫 <b>Open tickets ({count})</b>:",
+    "tickets_empty": "🎉 No open tickets!",
+    "ticket_taken": "Ticket assigned to you",
+    "transcript": "Client conversation transcript:",
+    "ticket_reply_prompt": "✉️ Type your reply to the client for ticket #{id}:",
+    "reply_sent": "✅ Reply sent to the client.",
+    "reply_failed": "⚠️ Could not deliver the message (bot blocked by user).",
+    "ticket_resolved": "Ticket resolved",
+    "excel_exported": "📥 Current DOMIK property database",
+    "excel_send_file": "📤 Send an <code>.xlsx</code> file to synchronize properties:",
+    "excel_bad_file": "⚠️ Invalid file. Please upload a valid .xlsx workbook.",
+    "excel_too_big": "⚠️ File is too large (max 10 MB).",
+    "excel_report": "✅ <b>Synchronization complete</b>\n• Created: <b>{created}</b>\n• Updated: <b>{updated}</b>\n• Unchanged: <b>{unchanged}</b>\n• Conflicts (CRM kept): <b>{conflicts}</b>\n• Row errors: <b>{errors}</b>",
+    "excel_conflicts": "⚠️ Skipped because CRM has newer changes:",
+    "agents_title": "🧑‍💼 <b>Agents</b>",
+    "agents_hint": "Add agent: <code>/add_agent &lt;telegram_id&gt; [Name]</code>",
+    "add_agent_usage": "Usage: <code>/add_agent &lt;telegram_id&gt; [Name]</code>",
+    "user_not_found": "User not found. They must press /start in the bot first.",
+    "agent_added": "✅ Agent <b>{name}</b> activated."
+  },
+  "errors": {
+    "generic": "⚠️ Something went wrong. Please try again.",
+    "not_found": "The requested item was not found.",
+    "permission_denied": "You do not have permission to perform this action.",
+    "validation": "Please check the provided data.",
+    "property_unavailable": "Unfortunately, this property is no longer available for booking.",
+    "slot_unavailable": "This time slot is no longer available. Please choose another slot.",
+    "booking_state": "This booking can no longer be modified.",
+    "extension_conflict": "Cannot extend the viewing: the agent has another appointment right after.",
+    "external_service": "External service is temporarily unavailable. Please try again shortly.",
+    "throttled": "⏳ Too many messages. Please wait a couple of seconds."
+  }
+}
