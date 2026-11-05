@@ -1,7 +1,7 @@
 from collections.abc import Sequence
 
 from aiogram.exceptions import TelegramBadRequest
-from aiogram.types import CallbackQuery, InlineKeyboardMarkup, InputMediaPhoto, Message
+from aiogram.types import CallbackQuery, InlineKeyboardMarkup, InputMediaPhoto, InputMediaVideo, Message
 
 from app.bot import texts
 from app.bot.keyboards import client as client_kb
@@ -35,14 +35,24 @@ async def send_property_cards(message: Message, props: Sequence[Property], t: Tr
 
 
 async def send_photos(message: Message, prop: Property) -> None:
-    photos = [p for p in prop.photos if p][:10]
-    if not photos:
+    items = [p for p in prop.photos if p][:10]
+    if not items:
         return
     try:
-        if len(photos) == 1:
-            await message.answer_photo(photos[0])
+        if len(items) == 1:
+            item = items[0]
+            if item.startswith("video:"):
+                await message.answer_video(item.removeprefix("video:"))
+            else:
+                await message.answer_photo(item.removeprefix("photo:"))
         else:
-            await message.answer_media_group([InputMediaPhoto(media=p) for p in photos])
+            media = [
+                InputMediaVideo(media=item.removeprefix("video:"))
+                if item.startswith("video:")
+                else InputMediaPhoto(media=item.removeprefix("photo:"))
+                for item in items
+            ]
+            await message.answer_media_group(media)
     except TelegramBadRequest as exc:
         log.warning("bot.photos_failed", property_id=prop.id, error=str(exc))
 

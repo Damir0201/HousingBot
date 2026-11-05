@@ -22,6 +22,19 @@ class BookingRepository:
         )
         return (await self.session.scalars(stmt)).all()
 
+    async def upcoming_counts_by_agent(
+        self, now: datetime, exclude_id: int | None = None
+    ) -> dict[int, int]:
+        stmt = (
+            select(Booking.agent_id, func.count())
+            .where(Booking.status == BookingStatus.SCHEDULED, Booking.ends_at > now)
+            .group_by(Booking.agent_id)
+        )
+        if exclude_id is not None:
+            stmt = stmt.where(Booking.id != exclude_id)
+        rows = await self.session.execute(stmt)
+        return {agent_id: int(count) for agent_id, count in rows.all()}
+
     async def client_scheduled_between(
         self, client_id: int, start: datetime, end: datetime, exclude_id: int | None = None
     ) -> Sequence[Booking]:

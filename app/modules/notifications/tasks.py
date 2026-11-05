@@ -4,6 +4,7 @@ from aiogram.exceptions import TelegramNetworkError, TelegramRetryAfter
 
 from app.infrastructure.database.session import task_session
 from app.infrastructure.telegram.bot import bot_session
+from app.modules.agents.service import AgentService
 from app.modules.bookings.service import BookingService
 from app.modules.crm.service import TicketService
 from app.modules.notifications.service import Notifier
@@ -14,7 +15,14 @@ from app.worker import celery_app, run_async
 
 log = get_logger(__name__)
 
-BookingEvent = Literal["created", "cancelled_by_client", "cancelled_by_staff", "rescheduled", "extended"]
+BookingEvent = Literal[
+    "created",
+    "cancelled_by_client",
+    "cancelled_by_staff",
+    "rescheduled",
+    "extended",
+    "reassigned",
+]
 
 RETRY_KW = {
     "autoretry_for": (TelegramNetworkError, TelegramRetryAfter),
@@ -47,18 +55,22 @@ def notify_booking_event(booking_id: int, event: BookingEvent) -> None:
     async def _run() -> None:
         async with task_session() as session, bot_session() as bot:
             booking = await BookingService(session).get(booking_id)
+            active_agents = await AgentService(session).list_active()
+            agent_users = [a.user for a in active_agents]
             notifier = Notifier(bot)
             match event:
                 case "created":
-                    await notifier.booking_created(booking)
+                    await notifier.booking_created(booking, agent_users)
                 case "cancelled_by_client":
-                    await notifier.booking_cancelled(booking, by_client=True)
+                    await notifier.booking_cancelled(booking, by_client=True, agents=agent_users)
                 case "cancelled_by_staff":
-                    await notifier.booking_cancelled(booking, by_client=False)
+                    await notifier.booking_cancelled(booking, by_client=False, agents=agent_users)
                 case "rescheduled":
-                    await notifier.booking_rescheduled(booking)
+                    await notifier.booking_rescheduled(booking, agent_users)
                 case "extended":
-                    await notifier.booking_extended(booking)
+                    await notifier.booking_extended(booking, agent_users)
+                case "reassigned":
+                    await notifier.booking_reassigned(booking, agent_users)
 
     run_async(_run())
 

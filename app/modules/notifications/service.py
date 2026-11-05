@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from html import escape
 
 from aiogram import Bot
@@ -41,25 +42,51 @@ class Notifier:
             log.warning("notify.failed", user_id=user.id, error=str(exc))
         return False
 
-    # ---------------------------------------------------------------- bookings
-    async def booking_created(self, booking: Booking) -> None:
-        agent = booking.agent.user
-        await self.send(agent, self.t(agent)("staff.booking_new", **texts.booking_vars(booking)))
+    @staticmethod
+    def _recipients(booking: Booking, agents: Iterable[User] | None = None) -> list[User]:
+        if not agents:
+            return [booking.agent.user]
+        seen: dict[int, User] = {booking.agent.user.id: booking.agent.user}
+        for u in agents:
+            seen[u.id] = u
+        return list(seen.values())
 
-    async def booking_cancelled(self, booking: Booking, *, by_client: bool) -> None:
-        agent = booking.agent.user
-        await self.send(agent, self.t(agent)("staff.booking_cancelled", **texts.booking_vars(booking)))
+    # ---------------------------------------------------------------- bookings
+    async def booking_created(self, booking: Booking, agents: Iterable[User] | None = None) -> None:
+        assigned_user_id = booking.agent.user_id
+        for recipient in self._recipients(booking, agents):
+            t = self.t(recipient)
+            markup = staff_kb.booking_reassign(booking.id, t) if recipient.id == assigned_user_id else None
+            await self.send(recipient, t("staff.booking_new", **texts.booking_vars(booking)), markup)
+
+    async def booking_reassigned(self, booking: Booking, agents: Iterable[User] | None = None) -> None:
+        assigned_user_id = booking.agent.user_id
+        for recipient in self._recipients(booking, agents):
+            t = self.t(recipient)
+            markup = staff_kb.booking_reassign(booking.id, t) if recipient.id == assigned_user_id else None
+            await self.send(recipient, t("staff.booking_reassigned", **texts.booking_vars(booking)), markup)
+
+    async def booking_cancelled(
+        self, booking: Booking, *, by_client: bool, agents: Iterable[User] | None = None
+    ) -> None:
+        for recipient in self._recipients(booking, agents):
+            t = self.t(recipient)
+            await self.send(recipient, t("staff.booking_cancelled", **texts.booking_vars(booking)))
         if not by_client:
             t = self.t(booking.client)
             await self.send(booking.client, t("booking.cancelled_by_staff", **texts.booking_vars(booking)))
 
-    async def booking_rescheduled(self, booking: Booking) -> None:
-        agent = booking.agent.user
-        await self.send(agent, self.t(agent)("staff.booking_rescheduled", **texts.booking_vars(booking)))
+    async def booking_rescheduled(self, booking: Booking, agents: Iterable[User] | None = None) -> None:
+        assigned_user_id = booking.agent.user_id
+        for recipient in self._recipients(booking, agents):
+            t = self.t(recipient)
+            markup = staff_kb.booking_reassign(booking.id, t) if recipient.id == assigned_user_id else None
+            await self.send(recipient, t("staff.booking_rescheduled", **texts.booking_vars(booking)), markup)
 
-    async def booking_extended(self, booking: Booking) -> None:
-        agent = booking.agent.user
-        await self.send(agent, self.t(agent)("staff.booking_extended", **texts.booking_vars(booking)))
+    async def booking_extended(self, booking: Booking, agents: Iterable[User] | None = None) -> None:
+        for recipient in self._recipients(booking, agents):
+            t = self.t(recipient)
+            await self.send(recipient, t("staff.booking_extended", **texts.booking_vars(booking)))
 
     async def reminder(self, booking: Booking) -> None:
         minutes = self.settings.reminder_minutes_before
@@ -70,8 +97,11 @@ class Notifier:
             client_kb.booking_actions(booking.id, t),
         )
         agent = booking.agent.user
+        t_agent = self.t(agent)
         await self.send(
-            agent, self.t(agent)("staff.reminder", minutes=minutes, **texts.booking_vars(booking))
+            agent,
+            t_agent("staff.reminder", minutes=minutes, **texts.booking_vars(booking)),
+            staff_kb.booking_reassign(booking.id, t_agent),
         )
 
     async def property_unavailable(self, booking: Booking, alternatives: list[Property]) -> None:

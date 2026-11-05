@@ -105,7 +105,7 @@ async def prompt_add_photo(
     await callback.answer()
 
 
-@router.message(StaffStates.property_photo, F.photo)
+@router.message(StaffStates.property_photo, F.photo | F.video)
 async def receive_property_photo(
     message: Message,
     state: FSMContext,
@@ -114,10 +114,15 @@ async def receive_property_photo(
 ) -> None:
     data = await state.get_data()
     property_id = data.get("property_id")
-    if not property_id or not message.photo:
+    if not property_id:
         await state.clear()
         return
-    file_id = message.photo[-1].file_id
+    if message.photo:
+        file_id = message.photo[-1].file_id
+    elif message.video:
+        file_id = f"video:{message.video.file_id}"
+    else:
+        return
     prop = await PropertyService(session).add_photo(int(property_id), file_id)
     await message.answer(
         t("admin.photo_added", code=escape(prop.code), count=len(prop.photos or [])),

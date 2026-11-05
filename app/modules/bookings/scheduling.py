@@ -21,6 +21,7 @@ class AgentSchedule:
     work_start: time
     work_end: time
     busy: tuple[Interval, ...] = field(default_factory=tuple)
+    total_upcoming: int = 0
 
     def working_window(self, day: date, tz: tzinfo) -> Interval:
         return Interval(datetime.combine(day, self.work_start, tz), datetime.combine(day, self.work_end, tz))
@@ -52,7 +53,7 @@ def free_agents(
 ) -> list[int]:
     """Agents free for the slot, least loaded first (fair distribution between agents)."""
     candidates = [s for s in schedules if s.is_free(slot, day, tz, buffer)]
-    candidates.sort(key=lambda s: (len(s.busy), s.agent_id))
+    candidates.sort(key=lambda s: (len(s.busy), s.total_upcoming, s.agent_id))
     return [s.agent_id for s in candidates]
 
 

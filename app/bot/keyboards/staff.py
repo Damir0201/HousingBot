@@ -106,6 +106,19 @@ def property_back(property_id: int, t: Translator) -> InlineKeyboardMarkup:
     )
 
 
+def booking_reassign(booking_id: int, t: Translator) -> InlineKeyboardMarkup:
+    return InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text=t("admin.btn.reassign"),
+                    callback_data=BookingCb(action="reassign", id=booking_id).pack(),
+                )
+            ]
+        ]
+    )
+
+
 def schedule(bookings: Sequence[Booking], day_offset: int, t: Translator) -> InlineKeyboardMarkup:
     b = InlineKeyboardBuilder()
     for booking in bookings:
@@ -116,6 +129,7 @@ def schedule(bookings: Sequence[Booking], day_offset: int, t: Translator) -> Inl
                 text=f"✅ {fmt_time(booking.starts_at)}",
                 callback_data=BookingCb(action="done", id=booking.id).pack(),
             ),
+            InlineKeyboardButton(text="🔄", callback_data=BookingCb(action="reassign", id=booking.id).pack()),
             InlineKeyboardButton(text="🚫", callback_data=BookingCb(action="noshow", id=booking.id).pack()),
             InlineKeyboardButton(
                 text="❌", callback_data=BookingCb(action="staff_cancel", id=booking.id).pack()

@@ -90,6 +90,33 @@ async def set_outcome(
     await callback.answer(t("admin.saved"), show_alert=True)
 
 
+@router.callback_query(BookingCb.filter(F.action == "reassign"))
+async def reassign_booking(
+    callback: CallbackQuery,
+    callback_data: BookingCb,
+    session: AsyncSession,
+    user: User,
+    t: Translator,
+    after_commit: AfterCommit,
+) -> None:
+    booking = await BookingService(session).reassign_to_other_agent(callback_data.id, user)
+    after_commit.append(partial(notify.notify_booking_event.delay, booking.id, "reassigned"))
+    await callback.answer(
+        t("admin.booking_reassigned", agent=booking.agent.display_name),
+        show_alert=True,
+    )
+    if callback.message and callback.message.reply_markup:
+        buttons = callback.message.reply_markup.inline_keyboard
+        if len(buttons) == 1 and len(buttons[0]) == 1:
+            await safe_edit(
+                callback,
+                t("staff.booking_reassigned", **texts.booking_vars(booking)),
+                kb.booking_reassign(booking.id, t),
+            )
+            return
+    await _render_schedule(callback, session, user, t, _day_offset_for(booking))
+
+
 @router.callback_query(BookingCb.filter(F.action == "staff_cancel"))
 async def staff_cancel(
     callback: CallbackQuery,

@@ -134,6 +134,30 @@ class BookingService:
             return booking
         raise SlotUnavailableError("No free agent for the new slot")
 
+    async def reassign_to_other_agent(self, booking_id: int, actor: User | None) -> Booking:
+        """Transfer an active viewing to another free active agent."""
+        booking = await self.get(booking_id)
+        await self._ensure_can_manage(booking, actor)
+        self._ensure_active(booking)
+
+        slot = Interval(booking.starts_at.astimezone(self.tz), booking.ends_at.astimezone(self.tz))
+        day = slot.start.date()
+        candidates = [
+            agent_id
+            for agent_id in await self._candidate_agents(slot, day, exclude_booking_id=booking.id)
+            if agent_id != booking.agent_id
+        ]
+        for agent_id in candidates:
+            try:
+                async with self.session.begin_nested():
+                    booking.agent_id = agent_id
+                    await self.session.flush()
+            except IntegrityError:
+                continue
+            await self.session.refresh(booking)
+            return booking
+        raise SlotUnavailableError("No other free agent for this slot")
+
     async def extend(self, booking_id: int, actor: User | None, minutes: int | None = None) -> Booking:
         """'I'm running late': push the end of the viewing if the agent's next slot allows."""
         minutes = minutes or self.settings.late_extension_minutes
@@ -246,12 +270,14 @@ class BookingService:
         for b in await self.repo.scheduled_between(start - self.buffer, end + self.buffer):
             if b.id != exclude_booking_id:
                 busy[b.agent_id].append(Interval(b.starts_at, b.ends_at))
+        upcoming_counts = await self.repo.upcoming_counts_by_agent(utcnow(), exclude_booking_id)
         return [
             scheduling.AgentSchedule(
                 agent_id=a.id,
                 work_start=a.work_start or self.settings.booking_work_start,
                 work_end=a.work_end or self.settings.booking_work_end,
                 busy=tuple(busy[a.id]),
+                total_upcoming=upcoming_counts.get(a.id, 0),
             )
             for a in agents
         ]
